@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VectorFlow - Home</title>
+    <!-- Link to Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Link to Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+
+
+
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@v0.163.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@v0.163.0/examples/jsm/"
+        }
+      }
+    </script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">VectorFlow</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#join">Join Us</a></li>
+            <li><a href="#members">Core Members</a></li>
+        </ul>
+        <div class="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
+    
+
+
+
+
+
+
+    <!-- Home Section with 3D Robot -->
+    <section id="home">
+        <div id="robot-container"></div>
+        <div class="intro">
+            <h1>Welcome to VectorFlow</h1>
+            <p>Innovate. Collaborate. Dominate.</p>
+        </div>
+    </section>
+    <script type="module" src="main.js"></script>
+    <!-- About Us Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>VectorFlow is a premier technical club at our college dedicated to fostering innovation, collaboration, and excellence in technology. We organize workshops, hackathons, and projects that empower students to push the boundaries of what's possible.</p>
+    </section>
+
+    <!-- Join Us Section -->
+    <section id="join">
+        <h2>Join Us</h2>
+        <p>Are you passionate about technology and eager to make a difference? Join VectorFlow to collaborate with like-minded individuals, work on exciting projects, and enhance your technical skills.</p>
+        <button onclick="location.href='mailto:join@vectorflow.com'">Sign Up Now</button>
+    </section>
+    
+    <!-- Core Members Section -->
+    <section id="members">
+        <h2>Core Members</h2>
+        <div class="members-grid">
+            <div class="member">
+                <div class="image-frame">
+                    <img src="https://via.placeholder.com/150" alt="Member 1">
+                </div>
+                <h3>John Doe</h3>
+                <p>President</p>
+            </div>
+            <div class="member">
+                <div class="image-frame">
+                    <img src="https://via.placeholder.com/150" alt="Member 2">
+                </div>
+                <h3>Jane Smith</h3>
+                <p>Vice President</p>
+            </div>
+            <div class="member">
+                <div class="image-frame">
+                    <img src="https://via.placeholder.com/150" alt="Member 3">
+                </div>
+                <h3>Mike Johnson</h3>
+                <p>Secretary</p>
+            </div>
+            <div class="member">
+                <div class="image-frame">
+                    <img src="https://via.placeholder.com/150" alt="Member 4">
+                </div>
+                <h3>Emily Davis</h3>
+                <p>Treasurer</p>
+            </div>
+            <!-- Add more members as needed -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 VectorFlow. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    
+</body>
+</html>
