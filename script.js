@@ -3,6 +3,10 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
+/* -----------------------------------
+   1. THREE.js Setup for 3D Animation
+----------------------------------- */
+
 // Renderer setup
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -170,22 +174,69 @@ function animate() {
 
 animate();
 
-// Function to trigger scroll to the next section
+/* -----------------------------------
+   2. Smooth Scroll Functionality
+----------------------------------- */
+
+// Function to smoothly scroll to a target element
+function smoothScrollTo(target, duration) {
+  const targetPosition =
+    target.getBoundingClientRect().top + window.pageYOffset;
+  const startPosition = window.pageYOffset;
+  const distance = targetPosition - startPosition;
+  const startTime = performance.now();
+
+  function animation(currentTime) {
+    const elapsedTime = currentTime - startTime;
+    const progress = Math.min(elapsedTime / duration, 1); // Clamp between 0 and 1
+
+    // Ease function (ease-in-out)
+    const easeProgress = progress * progress * (3 - 2 * progress);
+
+    // Calculate the new scroll position
+    const newPosition = startPosition + distance * easeProgress;
+
+    window.scrollTo(0, newPosition);
+
+    // Continue the animation if the progress is less than 1
+    if (progress < 1) {
+      requestAnimationFrame(animation);
+    }
+  }
+
+  requestAnimationFrame(animation);
+}
+
+// Function to trigger the smooth scroll to 'about' section after the animation ends
 function triggerScroll() {
   // Delay to ensure any final animations/rendering completes
   setTimeout(() => {
-    // Scroll to the 'about' section
     const aboutSection = document.getElementById("about");
     if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" });
+      // Adjust the scroll duration (in milliseconds)
+      smoothScrollTo(aboutSection, 2000); // 2000ms = 2 seconds for smoother scroll
     }
-  }, 1000); // 500ms delay
+  }, 1000); // Delay before triggering the scroll
 }
 
-// Hamburger Menu Toggle
-const hamburger = document.querySelector(".hamburger");
-const navLinks = document.querySelector(".nav-links");
+/* -----------------------------------
+   3. Hamburger Menu Toggle
+----------------------------------- */
 
-hamburger.addEventListener("click", () => {
-  navLinks.classList.toggle("active");
+// Ensure the DOM is fully loaded before querying elements
+document.addEventListener("DOMContentLoaded", () => {
+  const hamburger = document.querySelector(".hamburger");
+  const navLinks = document.querySelector(".nav-links");
+
+  // Check if elements exist
+  if (!hamburger || !navLinks) {
+    console.error("Hamburger or nav-links element not found.");
+    return;
+  }
+
+  // Toggle 'active' class on nav-links when hamburger is clicked
+  hamburger.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+    hamburger.classList.toggle("active"); // Optional: Toggle 'active' class on hamburger for animation
+  });
 });
