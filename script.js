@@ -216,7 +216,7 @@ function triggerScroll() {
       // Adjust the scroll duration (in milliseconds)
       smoothScrollTo(aboutSection, 2000); // 2000ms = 2 seconds for smoother scroll
     }
-  }, 1000); // Delay before triggering the scroll
+  }, 1500); // Delay before triggering the scroll
 }
 
 /* -----------------------------------
@@ -238,5 +238,45 @@ document.addEventListener("DOMContentLoaded", () => {
   hamburger.addEventListener("click", () => {
     navLinks.classList.toggle("active");
     hamburger.classList.toggle("active"); // Optional: Toggle 'active' class on hamburger for animation
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  // Play the welcome sound on page load
+  const welcomeAudio = document.getElementById("welcomeAudio");
+  welcomeAudio.play();
+
+  // Listen for scroll events to play transition sound
+  const sections = document.querySelectorAll("section");
+  let lastKnownScrollPosition = 0;
+  let ticking = false;
+
+  function playTransitionSound() {
+    const transitionAudio = document.getElementById("transitionAudio");
+    transitionAudio.play();
+  }
+
+  // Check if user has scrolled to a new section
+  function handleScroll(scrollPos) {
+    for (let section of sections) {
+      const rect = section.getBoundingClientRect();
+      if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+        playTransitionSound();
+        break;
+      }
+    }
+  }
+
+  // Scroll event listener
+  window.addEventListener("scroll", function () {
+    lastKnownScrollPosition = window.scrollY;
+
+    if (!ticking) {
+      window.requestAnimationFrame(function () {
+        handleScroll(lastKnownScrollPosition);
+        ticking = false;
+      });
+
+      ticking = true;
+    }
   });
 });
